@@ -25,3 +25,20 @@ resource "aws_instance" "my_ec2_instance" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.my_subnet.id
 }
+
+
+resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0" # Update with your preferred AMI
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.my_subnet.id
+
+  provisioner "local-exec" {
+    command = <<EOT
+      ansible-playbook -i hosts.ini configure_ec2.yml
+    EOT
+  }
+
+  tags = {
+    Name = "AnsibleConfiguredInstance"
+  }
+}
