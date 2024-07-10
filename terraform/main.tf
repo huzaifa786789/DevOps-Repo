@@ -28,7 +28,7 @@ resource "aws_instance" "my_ec2_instance" {
 
 
 resource "aws_instance" "web" {
-  ami           = "ami-0c55b159cbfafe1f0" # Update with your preferred AMI
+  ami           = "ami-0cff7528ff583bf9a" # Update with your preferred AMI
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.my_subnet.id
 
