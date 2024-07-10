@@ -24,13 +24,6 @@ resource "aws_instance" "my_ec2_instance" {
   ami           = "ami-0cff7528ff583bf9a"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.my_subnet.id
-}
-
-
-resource "aws_instance" "web" {
-  ami           = "ami-0cff7528ff583bf9a" # Update with your preferred AMI
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.my_subnet.id
 
   provisioner "local-exec" {
     command = <<EOT
@@ -41,4 +34,8 @@ resource "aws_instance" "web" {
   tags = {
     Name = "AnsibleConfiguredInstance"
   }
+}
+
+output "ec2_public_ip" {
+  value = aws_instance.my_ec2_instance.public_ip
 }
