@@ -1,5 +1,7 @@
 provider "aws" {
   region = "us-west-2"
+  access_key = "AWS_ACCESS_KEY_ID"
+  secret_key = "WS_SECRET_ACCESS_KEY"
 }
 
 resource "aws_vpc" "main" {
@@ -29,4 +31,3 @@ resource "aws_instance" "web" {
     Name = "web-instance"
   }
 }
-
