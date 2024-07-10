@@ -1,3 +1,5 @@
+
+
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
@@ -17,7 +19,7 @@ resource "aws_subnet" "main" {
 }
 
 resource "aws_instance" "web" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Change to your preferred AMI
+  ami           = "ami-06c68f701d8090592"  # Change to your preferred AMI
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.main.id
 
@@ -25,4 +27,3 @@ resource "aws_instance" "web" {
     Name = "web-instance"
   }
 }
-
