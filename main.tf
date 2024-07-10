@@ -17,7 +17,7 @@ resource "aws_subnet" "main" {
 }
 
 resource "aws_instance" "web" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Change to your preferred AMI
+  ami           = "ami-06c68f701d8090592"  # Change to your preferred AMI
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.main.id
 
