@@ -25,4 +25,7 @@ resource "aws_instance" "web" {
     Name = "web-instance"
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7a6fc24cfc198cd913d77deac3cabc1495563201
