@@ -25,3 +25,7 @@ resource "aws_instance" "my_ec2_instance" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.my_subnet.id
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7a6fc24cfc198cd913d77deac3cabc1495563201
