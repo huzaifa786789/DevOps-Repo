@@ -1,29 +1,29 @@
-resource "aws_vpc" "main" {
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.74.2"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
-
-  tags = {
-    Name = "main-vpc"
-  }
 }
 
-resource "aws_subnet" "main" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-west-2a"  # Change to your preferred availability zone
-
-  tags = {
-    Name = "main-subnet"
-  }
+resource "aws_subnet" "my_subnet" {
+  vpc_id     = aws_vpc.my_vpc.id
+  cidr_block = "10.0.1.0/24"
 }
 
-resource "aws_instance" "web" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Change to your preferred AMI
+resource "aws_instance" "my_ec2_instance" {
+  ami           = "ami-0cff7528ff583bf9a"
   instance_type = "t2.micro"
-  subnet_id     = aws_subnet.main.id
-
-  tags = {
-    Name = "web-instance"
-  }
+  subnet_id     = aws_subnet.my_subnet.id
 }
 <<<<<<< HEAD
 
