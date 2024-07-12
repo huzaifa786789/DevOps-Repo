@@ -49,12 +49,12 @@ jobs:
       id: get_ip
       run: |
         cd terraform
-        terraform output -raw ec2_public_ip > ../ec2_public_ip.txt
+        terraform output -raw 3.231.156.19 > ../3.231.156.19.txt
 
     - name: 'Set EC2 Public IP as Environment Variable'
       run: |
-        echo "EC2_PUBLIC_IP=$(cat ec2_public_ip.txt)" >> $GITHUB_ENV
+        echo "EC2_PUBLIC_IP=$(cat 3.231.156.19.txt)" >> $GITHUB_ENV
 
     - name: 'Run Ansible Playbook'
       run: |
-        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i "${{ env.EC2_PUBLIC_IP }}," --private-key /path/to/your/private-key.pem ansible-playbooks/site.yml
+        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i "$3.231.156.19," --private-key /ansible-playbooks/ansible_ssh_private_key_file.pem ansible-playbooks/site.yml
