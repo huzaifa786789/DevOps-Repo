@@ -25,6 +25,7 @@ jobs:
         terraform init
 
     - name: 'Terraform Apply'
+      id: tf_apply
       run: | 
         cd terraform
         terraform apply -auto-approve
@@ -37,8 +38,21 @@ jobs:
         sudo apt update
         sudo apt install -y ansible
 
+    - name: 'Check Ansible Playbook Path'
+      run: |
+        if [ ! -f ansible-playbooks/site.yml ]; then
+          echo "Ansible playbook not found!"
+          exit 1
+        fi
+
+    - name: 'Get EC2 Public IP'
+      id: get_ip
+      run: |
+        cd terraform
+        echo "EC2_PUBLIC_IP=$(terraform output -raw ec2_public_ip)" >> $GITHUB_ENV
+
     - name: 'Run Ansible Playbook'
       run: |
-        ansible-playbook -i 'ec2-instance-public-ip,' --private-key /path/to/your/private-key.pem ansible-playbooks/site.yml
+        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i "${{ env.EC2_PUBLIC_IP }}," --private-key /path/to/your/private-key.pem ansible-playbooks/site.yml
       env:
-        ANSIBLE_HOST_KEY_CHECKING: 'False'
+        EC2_PUBLIC_IP: ${{ env.EC2_PUBLIC_IP }}
