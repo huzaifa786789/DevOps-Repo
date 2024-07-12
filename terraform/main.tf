@@ -25,3 +25,8 @@ resource "aws_instance" "my_ec2_instance" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.my_subnet.id
 }
+
+output "ec2_public_ip" {
+  value = aws_instance.example.public_ip
+}
+
