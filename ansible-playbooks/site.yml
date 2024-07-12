@@ -1,0 +1,34 @@
+---
+- name: Configure EC2 instance
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Create Docker Compose directory
+      file:
+        path: /opt/docker-compose
+        state: directory
+
+    - name: Copy Docker Compose file
+      copy:
+        src: ./docker-compose.yml
+        dest: /opt/docker-compose/docker-compose.yml
+
+    - name: Start Docker Compose
+      command: docker-compose up -d
+      args:
+        chdir: /opt/docker-compose
