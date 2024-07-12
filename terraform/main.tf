@@ -27,6 +27,7 @@ resource "aws_instance" "my_ec2_instance" {
 }
 
 output "ec2_public_ip" {
-  value = aws_instance.example.public_ip
+  value = aws_instance.example.3.231.156.19
+
 }
 
