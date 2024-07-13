@@ -1,0 +1,12 @@
+---
+- name: Copy Docker Compose file
+  copy:
+    src: docker-compose.yml
+    dest: /home/ubuntu/docker-compose.yml
+    owner: ubuntu
+    group: ubuntu
+
+- name: Run Docker Compose
+  command: docker-compose up -d
+  args:
+    chdir: /home/ubuntu
